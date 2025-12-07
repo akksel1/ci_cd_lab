@@ -60,7 +60,7 @@ class TestE2E(unittest.TestCase):
         
         submit_btn = driver.find_element(By.TAG_NAME, 'button')
         submit_btn.click()
-        
+        time.sleep(2)
         self.assertIn('Your Tasks', driver.page_source)
         self.assertIn('Logged in as e2e_user', driver.page_source)
         
@@ -73,19 +73,19 @@ class TestE2E(unittest.TestCase):
         driver.find_element(By.NAME, 'description').send_keys('Automated by robot')
         
         driver.find_element(By.TAG_NAME, 'button').click()
-        
+        time.sleep(2)
         self.assertIn('Selenium Task', driver.page_source)
 
     def test_3_toggle_task(self):
         driver = self.driver
         driver.get('http://localhost:5002/')
-        
+        time.sleep(2)
         self.assertIn('Open', driver.page_source)
         
         buttons = driver.find_elements(By.XPATH, "//button[contains(text(), 'Complete')]")
         if buttons:
             buttons[0].click()
-            
+            time.sleep(2)
             self.assertIn('Done', driver.page_source)
             self.assertIn('Reopen', driver.page_source)
         else:

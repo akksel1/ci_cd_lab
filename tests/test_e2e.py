@@ -16,10 +16,11 @@ class TestE2E(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         """Configuration globale : lancée une seule fois avant tous les tests"""
-        cls.app = create_app()
-        cls.app.config['TESTING'] = True
-        cls.app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///e2e.db'
-        cls.app.config['WTF_CSRF_ENABLED'] = False
+        cls.app = create_app({
+            'TESTING': True,
+            'SQLALCHEMY_DATABASE_URI': 'sqlite:///e2e.db',
+            'WTF_CSRF_ENABLED': False
+        })
         
         with cls.app.app_context():
             db.create_all()
